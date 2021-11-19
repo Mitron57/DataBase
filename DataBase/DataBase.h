@@ -2,10 +2,13 @@
 
 #include <fstream>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
-#include <limits>
 
-#include "Definition.h"
-#include "UniBase.h"
+#include "Global.h"
+#include "Opener.h"
 #include "Writer.h"
+#include "Writer[TName, TCode, TCost].h"
+#include "Reader.h"
+#include "Editor.h"
+#include "Collector.h"

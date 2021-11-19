@@ -1,31 +1,43 @@
 namespace Data::UniBase
 {
-    class Writer: public UniBase
+    template<typename ...>
+    class Writer
     {
-        //TODO: сделать функцию для проверки номера объекта
-        public: static int ctnofo() //Check the number of object
+        protected: static int NumofObj()
         {
-            std::string str{};
-            std::vector<std::string> num{};
-            while (getline(doc, str))
+            std::ifstream idoc(path, std::ios::in);
+            std::string str;
+            while(getline(idoc, str)) 
             {
-                num.push_back(str);
+                Data.push_back(str);
             }
-            for (int i{}; i<size(num); i++){std::cout<<'\n'<<num[i]<<'\n';}
-            doc.close();
-            return size(num);
+            idoc.close();
+            return size(Data);
         }
         
         public: static void Write()
         {
+            std::ofstream Name("name", std::ios::app);
+            std::ofstream Code("vendor", std::ios::app);
+            std::ofstream Cost("cost", std::ios::app);
             std::string str{};
-            doc.open(path, std::ios::app);
-            std::cout<<ctnofo()<<'\n';
-            doc<<ctnofo()+1<<"    ";
-            std::cout<<"Enter name of product: ";
+            doc<<NumofObj()+1<<"    ";
+            std::cout<<"Enter name of product: \n";
             getline(std::cin, str);
-            doc<<str<<'\n';
+            Name<<str<<'\n';
+            Name.close();
+            std::cout<<"Enter vendor code: \n";
+            getline(std::cin, str);
+            Code<<str<<'\n';
+            Code.close();
+            std::cout<<"Enter cost: \n";
+            getline(std::cin, str);
+            Cost<<str<<'\n';
+            Cost.close();
+            doc.close();
         }
-        public: Writer() { Write();};
+        
+        public: Writer() = default;
+        public: virtual ~Writer() = default;
     };
 }
