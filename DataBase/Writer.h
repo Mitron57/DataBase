@@ -1,14 +1,29 @@
 namespace Data::UniBase
 {
-    class Writer: public UniBase
+    template<typename ...>
+    class Writer
     {
-        public: static void Write()
+        public: static auto Write() -> void
         {
-            std::string str;
-            std::cout<<"Enter name of product: ";
+            std::ofstream Name("name", std::ios::app);
+            std::ofstream Code("vendor", std::ios::app);
+            std::ofstream Cost("cost", std::ios::app);
+            std::string str{};
+            std::cout<<"Enter name of product: \n";
             getline(std::cin, str);
-            doc<<str;
+            Name<<str<<'\n';
+            Name.close();
+            std::cout<<"Enter vendor code: \n";
+            getline(std::cin, str);
+            Code<<str<<'\n';
+            Code.close();
+            std::cout<<"Enter cost: \n";
+            getline(std::cin, str);
+            Cost<<str<<'\n';
+            Cost.close();
         }
-        public: Writer() { Write();};
+        
+        public: Writer() = default;
+        public: virtual ~Writer() = default;
     };
 }
