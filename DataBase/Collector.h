@@ -2,10 +2,23 @@ namespace Data::UniBase
 {
     class Collector
     {
-        private: static void GetData(const std::string& path_to_file, std::vector<std::string>& vec)
+        public: static auto NumOfObj() -> std::uint32_t
+        {
+            std::vector<std::string> vec;
+            std::ifstream idoc("Data", std::ios::in);
+            auto str = std::make_unique<std::string>();
+            while(getline(idoc, *str))
+            {
+                vec.push_back(*str);
+            }
+            idoc.close();
+            return std::size(vec);
+        }
+        
+        private: static auto GetData(const std::string& path_to_file, std::vector<std::string>& vec) -> void
         {
             std::ifstream FileName(path_to_file, std::ios::in);
-            std::string str {};
+            std::string str;
             while(getline(FileName, str))
             {
                 vec.push_back(str);
@@ -13,20 +26,25 @@ namespace Data::UniBase
             FileName.close();
         }
         
-        public: Collector()
+        public: static auto Collect() -> void
         {
-            doc.open(path, std::ios::trunc);
+            std::ofstream d ("Data", std::ios::trunc);
             std::vector<std::string> name {};
             std::vector<std::string> code {};
             std::vector<std::string> cost {};
             GetData("name", name);
             GetData("vendor", code);
             GetData("cost", cost);
-            for(int i{}; i<size(name); i++)
+            auto num = NumOfObj();
+            for(int i{}; i<std::size(name); i++)
             {
-                doc<<name[i]<<"    "<<code[i]<<"    "<<cost[i]<<'\n';
+                num += 1;
+                d<<num<<"    "<<name[i]<<"    "<<code[i]<<"    "<<cost[i]<<'\n';
             }
-            doc.close();
+            d.close();
         }
+        
+        public: Collector() = default;
+        public: ~Collector() = default;
     };
 }
