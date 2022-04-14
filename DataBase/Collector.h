@@ -4,7 +4,7 @@ namespace Data::UniBase
     {
         public: static auto NumOfObj() -> std::uint32_t
         {
-            std::vector<std::string> vec;
+            std::vector<std::string> vec {};
             std::ifstream idoc("Data", std::ios::in);
             std::string str{};
             while(getline(idoc, str))
