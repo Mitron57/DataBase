@@ -6,10 +6,10 @@ namespace Data::UniBase
         {
             std::vector<std::string> vec;
             std::ifstream idoc("Data", std::ios::in);
-            auto str = std::make_unique<std::string>();
-            while(getline(idoc, *str))
+            std::string str{};
+            while(getline(idoc, str))
             {
-                vec.push_back(*str);
+                vec.push_back(str);
             }
             idoc.close();
             return std::size(vec);

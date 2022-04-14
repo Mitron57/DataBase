@@ -2,42 +2,30 @@
 
 using namespace Data::UniBase;
 
-auto parse_args(char** begin, char** end) {
-    char** arg = std::find(begin, end, std::string("-preset"));
-    if(arg != end && ++arg!=end) {
-        char argument = *(*arg);
-        if(argument=='1') {
-            Writer<>::Write();
+int main() {
+    std::cout<<"Welcome to my DataBase!\nThis project is experimental and has no proposals\n"
+               "besides demonstrating my project to my school.\n"
+               "Type Help to see list of commands.\n";
+    while(true) {
+        std::string user_command {};
+        std::cin >> user_command;
+        if(user_command=="Read") { Reader::Read(); }
+        else if(user_command=="Write") {
+            Writer::Write();
             Collector::Collect();
-            std::cout<<"Do you want to read list?[y\\n]\n";
-            char answer = ' ';
-            std::cin>>answer;
-            if(answer=='y') { Reader::Read(); }
-            else { return; }
         }
-        else if(argument=='2') {
-            Editor::Edit();
-            std::cout<<"Do you want to read list?[y\\n]\n";
-            char answer = ' ';
-            std::cin>>answer;
-            if(answer=='y') { Reader::Read(); }
-            else { return; }
+        else if(user_command=="Help") {
+            std::cout<<"This program has following commands:\n"
+                       "1. Read - read data from file.\n"
+                       "2. Write - write data in file\n"
+                       "3. Edit - edit data in file\n"
+                       "4. Exit - exit from program\n"
+                       "5. Clear - clear your screen\n";
         }
-        else if(argument=='3') {
-            Reader::Read();
-        }
-        else if(argument=='4'){
-            Reader::Read();
-            Writer<>::Write();
-            Collector::Collect();
-            Editor::Edit();
-            Reader::Read();
-        }
-    } 
-    else { throw std::runtime_error("Not enough arguments"); }
-}
-
-int main(int argc, char** argv) {
-    parse_args(argv, argv+argc);
+        else if(user_command=="Edit") { Editor::Edit(); }
+        else if(user_command=="Clear") { system("clear"); }
+        else if(user_command=="Exit") { break; }
+        user_command.clear();
+    }
     return 0;
 }

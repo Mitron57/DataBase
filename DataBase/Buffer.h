@@ -7,11 +7,11 @@ namespace Data::UniBase
         {
             std::ofstream Buff ("buffer", std::ios::trunc);
             std::ifstream File(filename, std::ios::in);
-            auto str = std::make_unique<std::string>();
+            std::string str {};
             std::vector<std::string> vec{};
-            while(getline(File, *str))
+            while(getline(File, str))
             {
-                vec.push_back(*str);
+                vec.push_back(str);
             }
             File.close();
             for (int i{}; i<std::size(vec); i++)
