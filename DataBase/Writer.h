@@ -24,6 +24,6 @@ namespace Data::UniBase
         }
         
         public: Writer() = default;
-        public: virtual ~Writer() = default;
+        public: ~Writer() = default;
     };
 }
