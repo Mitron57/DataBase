@@ -20,7 +20,8 @@ int main() {
                        "2. Write - write data in file\n"
                        "3. Edit - edit data in file\n"
                        "4. Exit - exit from program\n"
-                       "5. Clear - clear your screen\n";
+                       "5. Clear - clear your screen\n"
+                       "Note: answer the questions by typing y or n\n";
         }
         else if(user_command=="Edit") { Editor::Edit(); }
         else if(user_command=="Clear") { system("clear"); }
