@@ -3,7 +3,7 @@
 using namespace Data::UniBase;
 
 int main() {
-    std::cout<<"Welcome to my DataBase!\nThis project is experimental and has no proposals\n"
+    std::cout<<"Welcome to my DataBase!\nThis project is experimental and has no purposes\n"
                "besides demonstrating my project to my school.\n"
                "Type Help to see list of commands.\n";
     while(true) {
