@@ -24,8 +24,6 @@ namespace Data::UniBase
             Collector::Collect();
             std::vector<std::string> data{};
             Fill(std::forward<std::vector<std::string>&>(data));
-            std::ofstream log("log");
-            for(int i{}; i<std::size(data); i++) { log<<data[i]<<'\n'; }
             std::string answer{};
             std::cout<<"Do you want to read current object?\n";
             std::cin>>answer;
@@ -33,9 +31,8 @@ namespace Data::UniBase
                 case 1: {
                     std::cout<<"Type the number of current object: \n";
                     int num{};
-                    std::cin.clear();
                     std::cin>>num;
-                    if(num < std::size(data) && num > 0) { std::cout<<data[num-1]<<'\n'; }
+                    if(num <= std::size(data) && num > 0) { std::cout<<data[num-1]<<'\n'; }
                     else { std::cout<<"Can`t find object with this number\n"; }
                     break;
                 }

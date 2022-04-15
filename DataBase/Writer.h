@@ -9,7 +9,7 @@ namespace Data::UniBase
             std::ofstream Cost("cost", std::ios::app);
             std::string str{};
             std::cout<<"Enter name of product:\n";
-            std::cin.clear();
+            std::cin.ignore();
             getline(std::cin, str);
             Name<<str<<'\n';
             Name.close();
