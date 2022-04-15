@@ -1,6 +1,5 @@
 namespace Data::UniBase
 {
-    template<typename ...>
     class Writer
     {
         public: static auto Write() -> void
@@ -9,15 +8,16 @@ namespace Data::UniBase
             std::ofstream Code("vendor", std::ios::app);
             std::ofstream Cost("cost", std::ios::app);
             std::string str{};
-            std::cout<<"Enter name of product: \n";
+            std::cout<<"Enter name of product:\n";
+            std::cin.ignore();
             getline(std::cin, str);
             Name<<str<<'\n';
             Name.close();
-            std::cout<<"Enter vendor code: \n";
+            std::cout<<"Enter vendor code:\n";
             getline(std::cin, str);
             Code<<str<<'\n';
             Code.close();
-            std::cout<<"Enter cost: \n";
+            std::cout<<"Enter cost:\n";
             getline(std::cin, str);
             Cost<<str<<'\n';
             Cost.close();

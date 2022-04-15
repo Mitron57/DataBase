@@ -21,6 +21,7 @@ namespace Data::UniBase
                 return 'd';
             else if (str == "Cost" || str =="cost")
                 return 's';
+            return ' ';
         }
         
         public: [[maybe_unused]] static auto Edit() -> void
@@ -130,9 +131,6 @@ namespace Data::UniBase
                     BuffInput.close();
                     break;
                 }
-                default:
-                    abort();
-            
             }
         }
         
