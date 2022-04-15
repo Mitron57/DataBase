@@ -18,7 +18,7 @@ namespace Data::UniBase
         private: static auto GetData(const std::string& path_to_file, std::vector<std::string>& vec) -> void
         {
             std::ifstream FileName(path_to_file, std::ios::in);
-            std::string str;
+            std::string str{};
             while(getline(FileName, str))
             {
                 vec.push_back(str);
