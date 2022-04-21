@@ -9,10 +9,7 @@ namespace Data::UniBase
             std::ifstream File(filename, std::ios::in);
             std::string str {};
             std::vector<std::string> vec{};
-            while(getline(File, str))
-            {
-                vec.push_back(str);
-            }
+            while(getline(File, str)) { vec.push_back(str); }
             File.close();
             for (int i{}; i<std::size(vec); i++)
                 Buff<<vec[i]<<'\n';
