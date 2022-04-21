@@ -1,8 +1,8 @@
 namespace Data::UniBase
 {
-    class Deleter
+    class Eraser
     {
-        static void Eraser(const std::string& filename, int arg) {
+        static void Delete(const std::string& filename, int arg) {
             Buffer::fill_buff(filename);
             std::vector<std::string> vec {};
             std::string str{};
@@ -20,15 +20,15 @@ namespace Data::UniBase
             file.close();
         }
     public: 
-        static void Delete() {
+        static void Erase() {
             std::cout<<"Type number of line, which you want to delete\n";
             int arg{};
             std::cin>>arg;
-            Eraser("name", arg);
-            Eraser("vendor", arg);
-            Eraser("cost", arg);
+            Delete("name", arg);
+            Delete("vendor", arg);
+            Delete("cost", arg);
         }
-        Deleter() = default;
-        ~Deleter() = default;
+        Eraser() = default;
+        ~Eraser() = default;
     };
 }

@@ -25,7 +25,7 @@ int main() {
                        "Note: answer the questions by typing y or n.\n";
         }
         else if(user_command=="Edit") { Editor::Edit(); }
-        else if(user_command=="Delete") { Deleter::Delete(); }
+        else if(user_command=="Delete") { Eraser::Erase(); }
         else if(user_command=="Clear") { system("clear"); }
         else if(user_command=="Exit") { break; }
         user_command.clear();
