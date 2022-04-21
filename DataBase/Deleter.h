@@ -27,7 +27,6 @@ namespace Data::UniBase
             Eraser("name", arg);
             Eraser("vendor", arg);
             Eraser("cost", arg);
-            std::cout<<"Success\n";
         }
         Deleter() = default;
         ~Deleter() = default;
