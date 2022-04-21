@@ -10,3 +10,4 @@
 #include "Collector.h"
 #include "Reader.h"
 #include "Editor.h"
+#include "Deleter.h"
