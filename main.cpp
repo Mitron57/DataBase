@@ -7,6 +7,7 @@ int main() {
                "besides demonstrating my project to my school.\n"
                "Type Help to see list of commands.\n";
     while(1) {
+        std::cout<<">>";
         std::string user_command {};
         std::cin >> user_command;
         if(user_command=="Read") { Reader::Read(); }

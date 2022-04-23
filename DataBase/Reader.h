@@ -6,21 +6,17 @@ namespace Data::UniBase
         {
             std::ifstream idoc("Data", std::ios::in);
             std::string str {};
-            while(getline(idoc, str))
-            {
-                vec.push_back(str);
-            }
+            while(getline(idoc, str)) { vec.push_back(str); }
             idoc.close();
         }
         
-        static auto Choose(const std::string& ans) -> bool
+        static inline auto Choose(const std::string& ans) -> bool
         {
             return (ans == "Y"|| ans == "y") || !(ans == "N" || ans == "n");
         }
         
         public: static auto Read() -> void
         {
-            doc.close();
             Collector::Collect();
             std::vector<std::string> data{};
             Fill(std::forward<std::vector<std::string>&>(data));
