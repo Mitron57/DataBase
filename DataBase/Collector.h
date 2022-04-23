@@ -2,15 +2,12 @@ namespace Data::UniBase
 {
     class Collector
     {
-        public: static auto NumOfObj() -> std::uint32_t
+        public: static auto NumOfRow() -> std::uint32_t
         {
             std::vector<std::string> vec {};
             std::ifstream idoc("Data", std::ios::in);
             std::string str{};
-            while(getline(idoc, str))
-            {
-                vec.push_back(str);
-            }
+            while(getline(idoc, str)) { vec.push_back(str); }
             idoc.close();
             return std::size(vec);
         }
@@ -19,10 +16,7 @@ namespace Data::UniBase
         {
             std::ifstream FileName(path_to_file, std::ios::in);
             std::string str{};
-            while(getline(FileName, str))
-            {
-                vec.push_back(str);
-            }
+            while(getline(FileName, str)) { vec.push_back(str); }
             FileName.close();
         }
         
@@ -35,7 +29,7 @@ namespace Data::UniBase
             GetData("name", name);
             GetData("vendor", code);
             GetData("cost", cost);
-            auto num = NumOfObj();
+            auto num = NumOfRow();
             for(int i{}; i<std::size(name); i++)
             {
                 num += 1;
