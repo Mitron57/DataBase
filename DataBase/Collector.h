@@ -22,20 +22,18 @@ namespace Data::UniBase
         
         public: static auto Collect() -> void
         {
-            std::ofstream d ("Data", std::ios::trunc);
-            std::vector<std::string> name {};
-            std::vector<std::string> code {};
-            std::vector<std::string> cost {};
-            GetData("name", name);
-            GetData("vendor", code);
-            GetData("cost", cost);
+            std::ofstream Data ("Data", std::ios::trunc);
+            std::vector<std::string> name {}, code {}, cost {};
+            std::async(GetData, "name", std::reference_wrapper(name)).wait();
+            std::async(GetData, "vendor", std::reference_wrapper(code)).wait();
+            std::async(GetData, "cost", std::reference_wrapper(cost)).wait();
             auto num = NumOfRow();
             for(int i{}; i<std::size(name); i++)
             {
                 num += 1;
-                d<<num<<"    "<<name[i]<<"    "<<code[i]<<"    "<<cost[i]<<'\n';
+                Data << num << "    " << name[i] << "    " << code[i] << "    " << cost[i] << '\n';
             }
-            d.close();
+            Data.close();
         }
         
         public: Collector() = default;

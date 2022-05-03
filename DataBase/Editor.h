@@ -2,112 +2,57 @@ namespace Data::UniBase
 {
     class Editor
     {
-        protected: static inline auto Exist(const int& num, const unsigned int& size) -> bool
+        private: static auto GetData(const std::string& path_to_file, std::vector<std::string>& vec) -> void
         {
-            return (num-1>=0 && num-1<size);
-        }
-        
-        protected: static auto Convert(const std::string& str) -> char
-        {
-            if(str == "Name" || str == "name")
-                return 'n';
-            else if (str == "Code" || str == "code")
-                return 'd';
-            else if (str == "Cost" || str =="cost")
-                return 's';
-            return ' ';
-        }
-        
-        public: static auto Edit() -> void
-        {
+            std::ifstream FileName(path_to_file, std::ios::in);
             std::string str{};
-            int num {};
-            std::cout<<"What do you want to change?\nName\nCode\nCost\n";
-            std::cin>>str;
-            std::vector<std::string> vec{};
-            switch(Convert(str))
-            {
-                case 'n':
-                {
-                    Buffer::fill_buff("name");
-                    std::ofstream Name("name", std::ios::trunc);
-                    std::ifstream BuffIn("buffer", std::ios::in);
-                    str.clear();
-                    while (getline(BuffIn, str)) { vec.push_back(str); }
-                    str.clear();
-                    std::cout << "What name do you want to change?(type number)\n";
-                    std::cin >> num;
-                    if (Exist(num, std::size(vec))) {
-                        std::cout << "Current name is: " << vec[num - 1] << '\n';
-                        std::cout << "New name is: ";
-                        std::cin >> str;
-                        vec[num - 1] = str;
-                        for (int i{}; i < std::size(vec); i++) {
-                            Name << vec[i] << '\n';
-                        }
-                    }
-                    else {std::cout<<"Can not find a row with this index\n";}
-                    vec.clear();
-                    BuffIn.close();
-                    Name.close();
-                    break;
-                }
+            while(getline(FileName, str)) { vec.push_back(str); }
+            FileName.close();
+        }
 
-                case 'd':
-                {
-                    Buffer::fill_buff("vendor");
-                    std::ofstream Code("vendor", std::ios::trunc);
-                    std::ifstream BuffInp("buffer", std::ios::in);
-                    str.clear();
-                    while (getline(BuffInp, str)) { vec.push_back(str); }
-                    str.clear();
-                    std::cout << "What vendor code do you want to change?(type number)\n";
-                    std::cin >> num;
-                    if (Exist(num, std::size(vec))) {
-                        std::cout << "Current vendor code is: " << vec[num - 1] << '\n';
-                        std::cout << "New vendor code is: ";
-                        std::cin >> str;
-                        vec[num - 1] = str;
-                        for (int i{}; i < std::size(vec); i++) {
-                            Code << vec[i] << '\n';
-                        }
-                    }
-                    else { std::cout<<"Can not find a row with this index\n"; }
-                    vec.clear();
-                    Code.close();
-                    BuffInp.close();
-                    break;
-                }
-                
-                case 's':
-                {
-                    Buffer::fill_buff("cost");
-                    std::ofstream Cost("cost", std::ios::trunc);
-                    std::ifstream BuffInput("buffer", std::ios::in);
-                    str.clear();
-                    while(getline(BuffInput, str)) { vec.push_back(str); }
-                    str.clear();
-                    std::cout<<"What cost do you want to change?(type number)\n";
-                    std::cin>>num;
-                    if (Exist(num, std::size(vec))) {
-                        std::cout << "Current cost is: " << vec[num - 1] << '\n';
-                        std::cout << "New cost is: ";
-                        std::cin >> str;
-                        vec[num - 1] = str;
-                        for (int i{}; i < std::size(vec); i++) {
-                            Cost << vec[i] << '\n';
-                        }
-                    }
-                    else { std::cout<<"Can not find a row with this index\n"; }
-                    vec.clear();
-                    Cost.close();
-                    BuffInput.close();
-                    break;
-                }
-                default: std::cout<<"Incorrect answer\n";
+        public: static auto Edit() -> void {
+            std::vector<std::string> name{}, code{}, cost{};
+            std::async(GetData, "name", std::reference_wrapper(name)).wait();
+            std::async(GetData, "vendor", std::reference_wrapper(code)).wait();
+            std::async(GetData, "cost", std::reference_wrapper(cost)).wait();
+            int num{};
+            std::string str{};
+            std::cout << "Type number of a row you want to edit.\n>>";
+            std::cin >> num;
+            if(num>std::size(name)) {
+                std::cout<<"Nothing to edit.\n";
+                return;
+            }
+            std::cout << "If you don`t want to edit any parameter just press Enter to skip it.\n";
+            std::cout << "Previous row: " << name[num-1] << " " << code[num-1] << " " << cost[num-1]<<'\n';
+            std::cout << "Your row.\nName: ";
+            std::cin.ignore();
+            getline(std::cin, str);
+            if(std::find(str.begin(), str.end(), '\n') != str.begin()) {
+                name[num-1] = str;
+            }
+            str.clear();
+            std::cout << "Vendor code: ";
+            getline(std::cin, str);
+            if(std::find(str.begin(), str.end(), '\n') != str.begin()) {
+                code[num-1] = str;
+            }
+            str.clear();
+            std::cout << "Cost: ";
+            getline(std::cin, str);
+            if(std::find(str.begin(), str.end(), '\n') != str.begin()) {
+                cost[num-1] = str;
+            }
+            str.clear();
+            std::ofstream Name("name", std::ios::trunc),
+                          Code("vendor", std::ios::trunc),
+                          Cost("cost", std::ios::trunc);
+            for(int i{}; i<std::size(name); ++i) {
+                Name << name[i] << '\n';
+                Code << code[i] << '\n';
+                Cost << cost[i] << '\n';
             }
         }
-        
         public: Editor() = default;
         public: ~Editor() = default;
     };
