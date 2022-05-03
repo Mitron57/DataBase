@@ -11,10 +11,7 @@ int main() {
         std::string user_command {};
         std::cin >> user_command;
         if(user_command=="Read") { Reader::Read(); }
-        else if(user_command=="Write") {
-            Writer::Write();
-            Collector::Collect();
-        }
+        else if(user_command=="Write") { Writer::Write(); }
         else if(user_command=="Help") {
             std::cout<<"This program has following commands:\n"
                        "1. Read - read a row/rows from file.\n"

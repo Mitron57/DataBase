@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(DataBase)
 
+set(CMAKE_CXX_FLAGS -pthread)
+
 add_library(${PROJECT_NAME}.Library INTERFACE)
 target_include_directories(${PROJECT_NAME}.Library INTERFACE ${PROJECT_NAME})
 
