@@ -4,7 +4,7 @@ namespace Data::UniBase
     {
         public: static auto Write() -> void
         {
-            std::ofstream Name("name", std::ios::app),
+            std::ofstream Name ("name", std::ios::app),
                           Code ("vendor", std::ios::app),
                           Cost ("cost", std::ios::app);
             std::string str{};
