@@ -21,11 +21,11 @@ namespace Data::UniBase
             std::vector<std::string> data{};
             Fill(std::reference_wrapper(data));
             std::string answer{};
-            std::cout<<"Do you want to read current object?\n>>";
+            std::cout<<"Do you want to read concrete object?\n>>";
             std::cin>>answer;
             switch(static_cast<int>(Choose(answer))) {
                 case 1: {
-                    std::cout<<"Type the number of current object:\n>>";
+                    std::cout<<"Type the number of concrete object:\n>>";
                     int num{};
                     std::cin >> num;
                     if(num <= std::size(data) && num > 0) { std::cout << data[num-1] << '\n'; }
