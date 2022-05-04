@@ -15,7 +15,7 @@ namespace Data::UniBase
             Name.close();
             std::cout << "Enter vendor code:\n>>";
             getline(std::cin, str);
-            Code << str<< '\n';
+            Code << str << '\n';
             Code.close();
             std::cout << "Enter cost:\n>>";
             getline(std::cin, str);
