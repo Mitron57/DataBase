@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <array>
 
 #include "Collector.h"
 #include "Writer.h"
